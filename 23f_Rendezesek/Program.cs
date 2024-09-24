@@ -56,11 +56,98 @@ namespace _23f_Rendezesek
 			lista[j] = temp;
         }
 
+		public static void Beszuró_rendezés(List<int> lista)
+		{
+			for (int i = 1; i < lista.Count; i++)
+			{
+				Süllyesztés(lista, i);
+			}
+		}
+
+		public static void Süllyesztés(List<int> lista, int i)
+		{
+			while (0 < i && lista[i-1] > lista[i])
+			{
+				Csere(lista, i - 1, i);
+				i--;
+			}
+		}
+
+		public static void Gagyi_Buborékos_rendezés(List<int> lista)
+		{
+			for (int meddig = lista.Count; 1 < meddig; meddig--)
+			{
+				Gagyin_Felbugyborékol_eddig(lista, meddig);
+				//Console.WriteLine();
+
+			}
+		}
+
+		public static void Gagyin_Felbugyborékol_eddig(List<int> lista, int meddig)
+		{
+			for (int i = 1; i < meddig; i++)
+			{
+				if (lista[i-1] > lista[i])
+				{
+					Csere(lista, i - 1, i);
+				}
+				//Console.WriteLine(Stringbe(lista));
+
+			}
+		}
+
+
+		public static void Buborékos_rendezés(List<int> lista)
+		{
+			int meddig = lista.Count;
+			while (0 < meddig)
+			{
+				if (Felbugyborékol_eddig(lista, meddig))
+					meddig -= 2;
+				else
+					meddig -= 1;
+                Console.WriteLine();
+            }
+		}
+
+		public static bool Felbugyborékol_eddig(List<int> lista, int meddig)
+		{
+			for (int i = 1; i < meddig - 1; i++)
+			{
+				if (lista[i - 1] > lista[i])
+				{
+					Csere(lista, i - 1, i);
+					Console.WriteLine(Stringbe(lista));
+				}
+			}
+
+			// ez az utolsó csere!
+			if (1 < meddig && lista[meddig - 2] > lista[meddig-1])
+			{
+				Csere(lista, meddig - 1 - 1, meddig - 1);
+				Console.WriteLine(Stringbe(lista));
+				return false;
+			}
+			else
+				return true;
+
+		}
+
+
+		static Random r = new Random();
+		public static void Keverés(List<int> lista)
+		{
+
+		}
+
 		static void Main(string[] args)
 		{
-			List<int> lista = new List<int> { 3, 0, 1, 8, 7, 2, 5, 4, 9, 6 };
+			List<int> lista = new List<int> { 3, 0, 1, 8, 7, 2, 5, 4, 6, 9 };
             Console.WriteLine(Stringbe(lista));
-            Minimumkiválasztásos_rendezés(lista);
+			//Minimumkiválasztásos_rendezés(lista);
+			//Beszuró_rendezés(lista);
+			//Gagyi_Buborékos_rendezés(lista);
+			//Buborékos_rendezés(lista);
 			Console.WriteLine(Stringbe(lista));
 
 		}
